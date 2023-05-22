@@ -1,0 +1,119 @@
+# Standards: 1.2
+---
+- name: Check shell version
+  register: gnome_version_check
+  failed_when: False
+  changed_when: False
+  check_mode: False
+  shell: gnome-shell --version | sed 's/[^0-9.]*\([0-9.]*\).*/\1/'
+  tags:
+    - gnome
+
+- name: Fact shell version
+  set_fact:
+    gnome_shell_version: "{{ gnome_version_check.stdout }}"
+  tags:
+    - gnome
+
+- name: Fetch plugin infos
+  loop: "{{ gnome_general_plugins + gnome_extra_plugins }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  register: gnome_plugins_info
+  ignore_errors: True
+  check_mode: False
+  uri:
+    url: "https://extensions.gnome.org/extension-info/?uuid={{ item.id | default(item) }}&shell_version={{ gnome_shell_version }}"
+    return_content: True
+  tags:
+    - gnome
+
+- name: Disable defined plugins
+  loop: "{{ gnome_plugins_info.results }}"
+  loop_control:
+    label: "{{ item.item.name | default(item.item) }}"
+  failed_when: False
+  changed_when: False
+  when: item.item.state | default('present') == 'absent'
+  command: "gnome-extensions disable {{ item.json.uuid }}"
+  tags:
+    - gnome
+
+- name: Uninstall defined plugins
+  loop: "{{ gnome_plugins_info.results }}"
+  loop_control:
+    label: "{{ item.item.name | default(item.item) }}"
+  when: item.item.state | default('present') == 'absent'
+  file:
+    path: "gnome-extensions uninstall {{ item.json.uuid }}"
+    state: absent
+  tags:
+    - gnome
+
+- name: Create plugin dirs
+  loop: "{{ gnome_plugins_info.results }}"
+  loop_control:
+    label: "{{ item.item.name | default(item.item) }}"
+  when: item.item.state | default('present') == 'present'
+  file:
+    path: "/usr/local/share/gnome-shell/extensions/{{ item.json.uuid }}"
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+    state: directory
+    recurse: True
+  tags:
+    - gnome
+
+- name: Install defined plugins
+  loop: "{{ gnome_plugins_info.results }}"
+  loop_control:
+    label: "{{ item.item.name | default(item.item) }}"
+  when: item.item.state | default('present') == 'present'
+  unarchive:
+    src: "https://extensions.gnome.org{{ item.json.download_url }}"
+    dest: "/usr/local/share/gnome-shell/extensions/{{ item.json.uuid }}"
+    owner: root
+    group: root
+    remote_src: True
+    creates: "/usr/local/share/gnome-shell/extensions/{{ item.json.uuid }}/metadata.json"
+  tags:
+    - gnome
+
+- name: Enable defined plugins
+  loop: "{{ gnome_plugins_info.results }}"
+  loop_control:
+    label: "{{ item.item.name | default(item.item) }}"
+  failed_when: False
+  changed_when: False
+  when: item.item.state | default('present') == 'absent'
+  command: "gnome-extensions enable {{ item.json.uuid }}"
+  tags:
+    - gnome
+
+- name: Install defined themes
+  loop: "{{ gnome_general_themes + gnome_extra_themes }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.state | default('present') == 'present'
+  unarchive:
+    src: "{{ item.url }}"
+    dest: /usr/share/themes
+    owner: root
+    group: root
+    remote_src: True
+  tags:
+    - gnome
+
+- name: Remove defined themes
+  loop: "{{ gnome_general_themes + gnome_extra_themes }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.state | default('present') == 'absent'
+  file:
+    path: "/usr/share/themes/{{ item.name }}"
+    state: absent
+  tags:
+    - gnome
+
+...

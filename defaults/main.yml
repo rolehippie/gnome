@@ -1,0 +1,13 @@
+# Standards: 1.2
+---
+gnome_general_plugins: []
+
+gnome_extra_plugins: []
+
+gnome_general_themes:
+  - name: Nordic-v40
+    url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+
+gnome_extra_themes: []
+
+...
