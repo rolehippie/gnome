@@ -56,7 +56,7 @@
     label: "{{ item.item.name | default(item.item) }}"
   when: item.item.state | default('present') == 'present'
   file:
-    path: "/usr/local/share/gnome-shell/extensions/{{ item.json.uuid }}"
+    path: "/usr/share/gnome-shell/extensions/{{ item.json.uuid }}"
     owner: root
     group: root
     mode: u=rwx,g=rx,o=rx
@@ -72,11 +72,12 @@
   when: item.item.state | default('present') == 'present'
   unarchive:
     src: "https://extensions.gnome.org{{ item.json.download_url }}"
-    dest: "/usr/local/share/gnome-shell/extensions/{{ item.json.uuid }}"
+    dest: "/usr/share/gnome-shell/extensions/{{ item.json.uuid }}"
     owner: root
     group: root
+    mode: u=rwX,g=rX,o=rX
     remote_src: True
-    creates: "/usr/local/share/gnome-shell/extensions/{{ item.json.uuid }}/metadata.json"
+    creates: "/usr/share/gnome-shell/extensions/{{ item.json.uuid }}/metadata.json"
   tags:
     - gnome
 
