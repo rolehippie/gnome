@@ -92,6 +92,15 @@
   tags:
     - gnome
 
+- name: Create themes dir
+  file:
+    path: /usr/share/themes
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  tags:
+    - gnome
+
 - name: Install defined themes
   loop: "{{ gnome_general_themes + gnome_extra_themes }}"
   loop_control:
