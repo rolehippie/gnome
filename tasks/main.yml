@@ -98,6 +98,7 @@
     owner: root
     group: root
     mode: u=rwx,g=rx,o=rx
+    state: directory
   tags:
     - gnome
 
