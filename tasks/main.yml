@@ -1,5 +1,15 @@
 # Standards: 1.2
 ---
+- name: Install required packages
+  loop: "{{ gnome_general_packages + gnome_extra_packages }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  package:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+  tags:
+    - gnome
+
 - name: Check shell version
   register: gnome_version_check
   failed_when: False

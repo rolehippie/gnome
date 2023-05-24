@@ -1,13 +1,59 @@
 # Standards: 1.2
 ---
+# @var gnome_general_packages:description: List of general packages to install
+# @var gnome_general_packages:example: >
+# gnome_general_packages:
+#   - gnome-calendar
+#   - name: gnome-foobar
+#     state: absent
+# @end
+gnome_general_packages: []
+
+# @var gnome_extra_packages:description: List of extra packages to install
+# @var gnome_extra_packages:example: >
+# gnome_extra_packages:
+#   - gnome-calendar
+#   - name: gnome-foobar
+#     state: absent
+# @end
+gnome_extra_packages: []
+
+# @var gnome_general_plugins:description: List of general extensions to install globally
+# @var gnome_general_plugins:example: >
+# gnome_general_plugins:
+#   - name: user-theme
+#     id: user-theme@gnome-shell-extensions.gcampax.github.com
+# @end
 gnome_general_plugins: []
 
+# @var gnome_extra_plugins:description: List of extra extensions to install globally
+# @var gnome_extra_plugins:example: >
+# gnome_extra_plugins:
+#   - name: user-theme
+#     id: user-theme@gnome-shell-extensions.gcampax.github.com
+# @end
 gnome_extra_plugins: []
 
+# @var gnome_general_themes:description: List of general themes to install globally
+# @var gnome_general_themes:example: >
+# gnome_general_themes:
+#   - name: Nordic-v40
+#     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+#   - name: foobar
+#     state: absent
+# @end
 gnome_general_themes:
   - name: Nordic-v40
     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
 
+# @var gnome_extra_themes:description: List of extra themes to install globally
+# @var gnome_extra_themes:example: >
+# gnome_extra_themes:
+#   - name: Nordic-v40
+#     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+#   - name: foobar
+#     state: absent
+# @end
 gnome_extra_themes: []
 
 ...
