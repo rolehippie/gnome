@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/rolehippie/gnome/compare/v1.0.1...v1.1.0) (2023-05-24)
+
+
+### Features
+
+* add defaults to optionally install gnome packages ([6f3f64f](https://github.com/rolehippie/gnome/commit/6f3f64fda3f94393fa3bf82be64b8453406a48cb))
+
 ## [1.0.1](https://github.com/rolehippie/gnome/compare/v1.0.0...v1.0.1) (2023-05-23)
 
 
