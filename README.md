@@ -17,8 +17,10 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 - [Requirements](#requirements)
 - [Default Variables](#default-variables)
+  - [gnome_extra_packages](#gnome_extra_packages)
   - [gnome_extra_plugins](#gnome_extra_plugins)
   - [gnome_extra_themes](#gnome_extra_themes)
+  - [gnome_general_packages](#gnome_general_packages)
   - [gnome_general_plugins](#gnome_general_plugins)
   - [gnome_general_themes](#gnome_general_themes)
 - [Discovered Tags](#discovered-tags)
@@ -35,7 +37,28 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 ## Default Variables
 
+### gnome_extra_packages
+
+List of extra packages to install
+
+#### Default value
+
+```YAML
+gnome_extra_packages: []
+```
+
+#### Example usage
+
+```YAML
+gnome_extra_packages:
+  - gnome-calendar
+  - name: gnome-foobar
+    state: absent
+```
+
 ### gnome_extra_plugins
+
+List of extra extensions to install globally
 
 #### Default value
 
@@ -43,7 +66,17 @@ Building and improving this Ansible role have been sponsored by my current and p
 gnome_extra_plugins: []
 ```
 
+#### Example usage
+
+```YAML
+gnome_extra_plugins:
+  - name: user-theme
+    id: user-theme@gnome-shell-extensions.gcampax.github.com
+```
+
 ### gnome_extra_themes
+
+List of extra themes to install globally
 
 #### Default value
 
@@ -51,7 +84,38 @@ gnome_extra_plugins: []
 gnome_extra_themes: []
 ```
 
+#### Example usage
+
+```YAML
+gnome_extra_themes:
+  - name: Nordic-v40
+    url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+  - name: foobar
+    state: absent
+```
+
+### gnome_general_packages
+
+List of general packages to install
+
+#### Default value
+
+```YAML
+gnome_general_packages: []
+```
+
+#### Example usage
+
+```YAML
+gnome_general_packages:
+  - gnome-calendar
+  - name: gnome-foobar
+    state: absent
+```
+
 ### gnome_general_plugins
+
+List of general extensions to install globally
 
 #### Default value
 
@@ -59,7 +123,17 @@ gnome_extra_themes: []
 gnome_general_plugins: []
 ```
 
+#### Example usage
+
+```YAML
+gnome_general_plugins:
+  - name: user-theme
+    id: user-theme@gnome-shell-extensions.gcampax.github.com
+```
+
 ### gnome_general_themes
+
+List of general themes to install globally
 
 #### Default value
 
@@ -67,6 +141,16 @@ gnome_general_plugins: []
 gnome_general_themes:
   - name: Nordic-v40
     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+```
+
+#### Example usage
+
+```YAML
+gnome_general_themes:
+  - name: Nordic-v40
+    url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+  - name: foobar
+    state: absent
 ```
 
 ## Discovered Tags
