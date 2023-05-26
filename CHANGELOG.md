@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/rolehippie/gnome/compare/v1.1.0...v1.2.0) (2023-05-26)
+
+
+### Features
+
+* improve theme path, add feature to install icons ([6f051dd](https://github.com/rolehippie/gnome/commit/6f051ddfb1c0cac5fe429c75a384f7689b604135))
+
 ## [1.1.0](https://github.com/rolehippie/gnome/compare/v1.0.1...v1.1.0) (2023-05-24)
 
 
