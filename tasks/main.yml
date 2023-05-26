@@ -103,6 +103,7 @@
     - gnome
 
 - name: Create themes dir
+  when: (gnome_general_themes + gnome_extra_themes) | length > 0
   file:
     path: /usr/share/themes
     owner: root
@@ -120,8 +121,10 @@
   unarchive:
     src: "{{ item.url }}"
     dest: /usr/share/themes
+    extra_opts: "{{ item.opts | default(omit) }}"
     owner: root
     group: root
+    mode: u=rwX,g=rX,o=rX
     remote_src: True
   tags:
     - gnome
@@ -133,6 +136,48 @@
   when: item.state | default('present') == 'absent'
   file:
     path: "/usr/share/themes/{{ item.name }}"
+    state: absent
+  tags:
+    - gnome
+
+- name: Create icons dir
+  when: (gnome_general_icons + gnome_extra_icons) | length > 0
+  file:
+    path: /usr/share/icons
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+    state: directory
+  tags:
+    - gnome
+
+- name: Install defined icons
+  loop: "{{ gnome_general_icons + gnome_extra_icons }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.state | default('present') == 'present'
+  notify:
+    - Update icons
+  unarchive:
+    src: "{{ item.url }}"
+    dest: /usr/share/icons
+    extra_opts: "{{ item.opts | default(omit) }}"
+    owner: root
+    group: root
+    mode: u=rwX,g=rX,o=rX
+    remote_src: True
+  tags:
+    - gnome
+
+- name: Remove defined icons
+  loop: "{{ gnome_general_icons + gnome_extra_icons }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.state | default('present') == 'absent'
+  notify:
+    - Update icons
+  file:
+    path: "/usr/share/icons/{{ item.name }}"
     state: absent
   tags:
     - gnome

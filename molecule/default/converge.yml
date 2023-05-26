@@ -2,6 +2,8 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    gnome_updated_icon_cache: False
   roles:
     - role: rolehippie.gnome
 

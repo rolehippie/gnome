@@ -1,0 +1,14 @@
+# Standards: 1.2
+---
+- name: Update icons
+  loop: "{{ gnome_general_icons + gnome_extra_icons }}"
+  loop_control:
+    label: "{{ item.name }}"
+  changed_when: False
+  when:
+    - item.state | default('present') == 'present'
+    - gnome_updated_icon_cache
+  command:
+    cmd: "gtk-update-icon-cache /usr/share/icons/{{ item.name }}"
+
+...

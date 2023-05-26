@@ -43,8 +43,11 @@ gnome_extra_plugins: []
 #     state: absent
 # @end
 gnome_general_themes:
-  - name: Nordic-v40
+  - name: Nordic
     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+    opts:
+      - --transform
+      - s/^Nordic-v40/Nordic/
 
 # @var gnome_extra_themes:description: List of extra themes to install globally
 # @var gnome_extra_themes:example: >
@@ -55,5 +58,38 @@ gnome_general_themes:
 #     state: absent
 # @end
 gnome_extra_themes: []
+
+# @var gnome_general_icons:description: List of general icons to install globally
+# @var gnome_general_icons:example: >
+# gnome_general_icons:
+#   - name: Nordic-v40
+#     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+#   - name: foobar
+#     state: absent
+# @end
+gnome_general_icons:
+  - name: Nordzy-Cursors
+    url: https://github.com/alvatip/Nordzy-cursors/releases/download/v0.6.0/Nordzy-cursors.tar.gz
+    opts:
+      - --transform
+      - s/^Nordzy-cursors/Nordzy-Cursors/
+  - name: Nordzy-Icons
+    url: https://github.com/alvatip/Nordzy-icon/releases/download/1.8.5/Nordzy.tar.gz
+    opts:
+      - --transform
+      - s/^Nordzy/Nordzy-Icons/
+
+# @var gnome_extra_icons:description: List of extra icons to install globally
+# @var gnome_extra_icons:example: >
+# gnome_extra_icons:
+#   - name: Nordic-v40
+#     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+#   - name: foobar
+#     state: absent
+# @end
+gnome_extra_icons: []
+
+# @var gnome_updated_icon_cache:description: Update the GTK icon cache
+gnome_updated_icon_cache: True
 
 ...
