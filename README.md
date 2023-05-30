@@ -17,12 +17,15 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 - [Requirements](#requirements)
 - [Default Variables](#default-variables)
+  - [gnome_extra_icons](#gnome_extra_icons)
   - [gnome_extra_packages](#gnome_extra_packages)
   - [gnome_extra_plugins](#gnome_extra_plugins)
   - [gnome_extra_themes](#gnome_extra_themes)
+  - [gnome_general_icons](#gnome_general_icons)
   - [gnome_general_packages](#gnome_general_packages)
   - [gnome_general_plugins](#gnome_general_plugins)
   - [gnome_general_themes](#gnome_general_themes)
+  - [gnome_updated_icon_cache](#gnome_updated_icon_cache)
 - [Discovered Tags](#discovered-tags)
 - [Dependencies](#dependencies)
 - [License](#license)
@@ -36,6 +39,26 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 
 ## Default Variables
+
+### gnome_extra_icons
+
+List of extra icons to install globally
+
+#### Default value
+
+```YAML
+gnome_extra_icons: []
+```
+
+#### Example usage
+
+```YAML
+gnome_extra_icons:
+  - name: Nordic-v40
+    url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+  - name: foobar
+    state: absent
+```
 
 ### gnome_extra_packages
 
@@ -94,6 +117,36 @@ gnome_extra_themes:
     state: absent
 ```
 
+### gnome_general_icons
+
+List of general icons to install globally
+
+#### Default value
+
+```YAML
+gnome_general_icons:
+  - name: Nordzy-Cursors
+    url: https://github.com/alvatip/Nordzy-cursors/releases/download/v0.6.0/Nordzy-cursors.tar.gz
+    opts:
+      - --transform
+      - s/^Nordzy-cursors/Nordzy-Cursors/
+  - name: Nordzy-Icons
+    url: https://github.com/alvatip/Nordzy-icon/releases/download/1.8.5/Nordzy.tar.gz
+    opts:
+      - --transform
+      - s/^Nordzy/Nordzy-Icons/
+```
+
+#### Example usage
+
+```YAML
+gnome_general_icons:
+  - name: Nordic-v40
+    url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+  - name: foobar
+    state: absent
+```
+
 ### gnome_general_packages
 
 List of general packages to install
@@ -139,8 +192,11 @@ List of general themes to install globally
 
 ```YAML
 gnome_general_themes:
-  - name: Nordic-v40
+  - name: Nordic
     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
+    opts:
+      - --transform
+      - s/^Nordic-v40/Nordic/
 ```
 
 #### Example usage
@@ -151,6 +207,16 @@ gnome_general_themes:
     url: https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic-v40.tar.xz
   - name: foobar
     state: absent
+```
+
+### gnome_updated_icon_cache
+
+Update the GTK icon cache
+
+#### Default value
+
+```YAML
+gnome_updated_icon_cache: true
 ```
 
 ## Discovered Tags
