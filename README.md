@@ -1,6 +1,6 @@
 # gnome
 
-[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&amp;logoColor=white)](https://github.com/rolehippie/gnome)
+[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/gnome)
 [![General Workflow](https://github.com/rolehippie/gnome/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/gnome/actions/workflows/general.yml)
 [![Readme Workflow](https://github.com/rolehippie/gnome/actions/workflows/docs.yml/badge.svg)](https://github.com/rolehippie/gnome/actions/workflows/docs.yml)
 [![Galaxy Workflow](https://github.com/rolehippie/gnome/actions/workflows/galaxy.yml/badge.svg)](https://github.com/rolehippie/gnome/actions/workflows/galaxy.yml)
@@ -36,7 +36,6 @@ Building and improving this Ansible role have been sponsored by my current and p
 ## Requirements
 
 - Minimum Ansible version: `2.10`
-
 
 ## Default Variables
 
@@ -126,7 +125,8 @@ List of general icons to install globally
 ```YAML
 gnome_general_icons:
   - name: Nordzy-Cursors
-    url: https://github.com/alvatip/Nordzy-cursors/releases/download/v0.6.0/Nordzy-cursors.tar.gz
+    url: 
+      https://github.com/alvatip/Nordzy-cursors/releases/download/v0.6.0/Nordzy-cursors.tar.gz
     opts:
       - --transform
       - s/^Nordzy-cursors/Nordzy-Cursors/
